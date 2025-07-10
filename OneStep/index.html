@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A.U.TO OneStep 配置器</title>
+  </head>
+  <body>
+    <div id="onestep-container" class="onestep-container">
+      <header class="onestep-header">
+        <div class="onestep-header__main-info">
+          <h1 class="onestep-header__title">A.U.T.O OneStep</h1>
+          <div id="global-actions-toolbar" class="onestep-global-actions">
+            <button id="save-to-lorebook-btn" class="btn">Save</button>
+            <button id="load-from-lorebook-btn" class="btn">Load</button>
+          </div>
+        </div>
+        <div id="page-actions-toolbar" class="onestep-page-actions"></div>
+      </header>
+      <nav id="main-nav" class="onestep-nav"></nav>
+      <main id="page-content" class="onestep-main">
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            font-size: 18px;
+            color: #30626c;
+          "
+        >
+          正在初始化...
+        </div>
+      </main>
+      <footer id="page-controls" class="onestep-footer"></footer>
+    </div>
+
+    <script id="bootloader">
+      (function () {
+        'use strict';
+        console.log('[Bootloader] Activated.');
+
+        function activate() {
+          console.log('[Bootloader] Activating application...');
+
+          // Activate CSS
+          const cssContainer = document.getElementById('onestep-styles-payload');
+          if (cssContainer) {
+            const style = document.createElement('style');
+            style.textContent = cssContainer.textContent;
+            document.head.appendChild(style);
+            console.log('[Bootloader] CSS injected.');
+          }
+
+          // Activate JS
+          const jsContainer = document.getElementById('onestep-script-payload');
+          if (jsContainer) {
+            const script = document.createElement('script');
+            script.textContent = jsContainer.textContent;
+            document.body.appendChild(script);
+            console.log('[Bootloader] JavaScript injected and executed.');
+          }
+
+          // Clean up bootloader script
+          const bootloaderScript = document.getElementById('bootloader');
+          if (bootloaderScript) {
+            bootloaderScript.remove();
+          }
+        }
+
+        // We use setTimeout to ensure this runs after the main thread is free,
+        // preventing any blocking of the parent page's rendering.
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => setTimeout(activate, 0));
+        } else {
+          setTimeout(activate, 0);
+        }
+      })();
+    </script>
+  </body>
+</html>

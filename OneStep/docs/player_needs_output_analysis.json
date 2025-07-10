@@ -1,0 +1,326 @@
+{
+  "output_format_description": {
+    "title": "“玩家需求”页面输出格式解析",
+    "description": "当用户点击“生成角色卡”时，“玩家需求”页面的数据会被格式化为一个名为'PlayerNeeds_Profile'的JSON对象，然后转换为文本。该文本块定义了玩家希望在叙事中获得的核心情感体验和互动边界。",
+    "structure": {
+      "PlayerNeeds_Profile": {
+        "emotion": "核心情感调色盘，包含点数分配和风味设定。",
+        "power": "玩家与NPC的权力动态，包括权力光谱、支配方、权力来源等。",
+        "narrative": "叙事基调与世界张力，如和谐度、节奏、视角等。",
+        "boundaries": "内容偏好与体验边界，如容忍度、内容等级、喜好/禁忌标签等。",
+        "custom_notes": "玩家填写的任何额外、自定义的需求。"
+      }
+    },
+    "generation_logic": "所有字段都由'src/OneStep/app/Formatter.ts'中的'formatNeeds'和'formatNeedsProfileToText'方法生成。空值或未设置的选项在最终文本输出中会被忽略。"
+  },
+  "full_example": {
+    "description": "模拟一个所有选项都被详细填写，并且包含自定义需求的输出结果。",
+    "PlayerNeeds_Profile": {
+      "emotion": {
+        "points": [
+          {
+            "label": "浪漫/亲密关系",
+            "points": 4,
+            "description": "角色间的爱情、亲情、友情等深刻的情感联结。"
+          },
+          {
+            "label": "情欲/性吸引力",
+            "points": 3,
+            "description": "角色间的性张力、欲望和亲密行为。"
+          },
+          {
+            "label": "成就/个人成长",
+            "points": 3,
+            "description": "角色通过克服挑战获得能力、地位或心智上的成长。"
+          }
+        ],
+        "flavors": {
+          "浪漫/亲密关系": {
+            "label": "浪漫/亲密关系",
+            "description": "风味设定",
+            "value": "4/7: 甜虐均衡: 甜蜜与痛苦深刻交织。"
+          },
+          "情欲/性吸引力": {
+            "label": "情欲/性吸引力",
+            "description": "风味设定",
+            "value": "5/7: 张力拉满: 强烈的欲望和情感拉扯，但未必有露骨行为。"
+          }
+        }
+      },
+      "power": {
+        "objective_spectrum": {
+          "label": "客观权力光谱",
+          "description": "定义PC与核心NPC之间的客观权力高低关系。",
+          "value": "3/7: PC略微弱势: PC在资源、地位或能力上稍逊一筹，需要更努力地争取。"
+        },
+        "dominant_party": {
+          "label": "主要支配方",
+          "description": "明确关系中的主要支配力量来源。",
+          "value": "2/4: 核心NPC: 核心NPC是关系中更主动、更有影响力的一方。"
+        },
+        "dominant_power_sources_points": [
+          {
+            "label": "社会地位",
+            "points": 4,
+            "description": "依靠阶级、头衔、职业、族群等带来的权力和影响力。"
+          },
+          {
+            "label": "情感勒索",
+            "points": 3,
+            "description": "利用爱、愧疚、责任等情感来影响或控制他人。"
+          }
+        ],
+        "expression_spectrum": {
+          "label": "权力表达方式光谱",
+          "description": "权力是公开宣告还是秘而不宣。",
+          "value": "4/7: 心照不宣: 双方都清楚权力关系，但从不公开讨论，通过暗示和行动体现。"
+        },
+        "importance_spectrum": {
+          "label": "玩家世界重要性光谱",
+          "description": "玩家行动对世界宏观走向的影响力。",
+          "value": "5/7: 关键变数: PC的行动是打破现状、决定未来的关键变量。"
+        },
+        "pc_dynamics": {
+          "interaction_strategy": {
+            "label": "互动策略",
+            "description": "PC为达成自身目的所采取的行为策略。",
+            "value": "4/7: 策略性合作: 为了共同或个人利益而结盟，但随时可能因利益冲突而改变。"
+          },
+          "initial_subjective_state": {
+            "label": "初始主观状态",
+            "description": "PC在故事开始时对权力关系的内心感受。",
+            "value": "3/5: 接受: PC理解并接受当前的权力结构，认为其是合理或不可避免的。"
+          },
+          "target_subjective_state": {
+            "label": "目标主观状态",
+            "description": "PC内心感受将倾向于变化成的目标状态。",
+            "value": "4/5: 享受: PC从权力关系中获得了满足感和愉悦感。"
+          }
+        },
+        "npc_dynamics": {
+          "interaction_strategy": {
+            "label": "互动策略",
+            "description": "核心NPC为达成自身目的所采取的行为策略原型。",
+            "value": "6/7: 诱导与操纵: 通过误导、魅力或心理技巧来引导他人，实现隐秘议程。"
+          },
+          "initial_subjective_state": {
+            "label": "初始主观状态",
+            "description": "核心NPC在故事开始时对权力关系的内心感受原型。",
+            "value": "4/5: 享受: NPC从权力关系中获得了满足感和愉悦感。"
+          },
+          "target_subjective_state": {
+            "label": "目标主观状态",
+            "description": "核心NPC内心感受将倾向于变化成的目标状态原型。",
+            "value": "2/5: 抗拒: NPC对权力关系感到不满，并试图反抗或摆脱。"
+          }
+        }
+      },
+      "narrative": {
+        "world_harmony_spectrum": {
+          "label": "世界和谐度光谱",
+          "description": "世界整体的和谐/冲突程度。",
+          "value": "3/7: 暗流涌动: 表面和平，但社会、政治或超自然层面的冲突一触即发。"
+        },
+        "npc_compliance_spectrum": {
+          "label": "NPC顺从度光谱",
+          "description": "NPC对玩家行动的顺从/抗拒程度。",
+          "value": "5/7: 伺机而动: NPC会暂时顺从，但始终在寻找机会以实现自己的目标。"
+        },
+        "pace_spectrum": {
+          "label": "故事节奏光谱",
+          "description": "故事推进的快慢、紧张/舒缓程度。",
+          "value": "4/7: 张弛有度: 在紧张的情节和轻松的日常之间取得平衡。"
+        },
+        "perspective_choice": {
+          "label": "叙事视角选择",
+          "description": "故事采用哪种叙事视角。",
+          "value": "2/4: 第二人称“你”"
+        },
+        "perspective_switching_mode": {
+          "label": "视角切换方式",
+          "description": "叙事过程中视角如何切换。",
+          "value": "2/4: 仅在关键时刻切换到NPC视角"
+        }
+      },
+      "boundaries": {
+        "consent_tolerance_level": {
+          "label": "同意容忍度光谱",
+          "description": "对角色行为边界的容忍度。",
+          "value": "4/7: 可被胁迫: 角色可能在压力、威胁或欺骗下做出违心的决定。"
+        },
+        "erotic_level": {
+          "label": "色情程度光谱",
+          "description": "故事中允许出现的色情内容程度。",
+          "value": "5/7: 露骨行为: 允许直接描写性行为，但非核心焦点。"
+        },
+        "erotic_focus": {
+          "label": "色情内容聚焦",
+          "description": "色情内容主要聚焦于哪些方面。",
+          "value": "3/5: 权力与臣服"
+        },
+        "violence_level": {
+          "label": "暴力程度光谱",
+          "description": "故事中允许出现的暴力内容程度。",
+          "value": "4/7: 血腥战斗: 允许详细描写战斗和伤害，但不过于残忍。"
+        },
+        "violence_focus": {
+          "label": "暴力内容聚焦",
+          "description": "暴力内容主要聚焦于哪些方面。",
+          "value": "2/5: 心理折磨"
+        },
+        "description_intensity_spectrum": {
+          "label": "描述强度光谱",
+          "description": "故事中对敏感内容的描述强度。",
+          "value": "5/7: 详尽直白: 对行为和感受进行详细、不加掩饰的描写。"
+        },
+        "consequence_severity_spectrum": {
+          "label": "后果严重性光谱",
+          "description": "角色行为带来的后果严重性。",
+          "value": "5/7: 严重后果: 错误的选择会导致重要角色死亡、关系彻底破裂或关键任务失败。"
+        },
+        "likes_tags": [
+          "权力反转",
+          "身份认同危机"
+        ],
+        "dislikes_tags": [
+          "浪漫喜剧",
+          "日常"
+        ]
+      },
+      "custom_notes": "我希望NPC是一个表面温柔但内心控制欲极强的角色，他/她的爱是沉重而令人窒息的。"
+    }
+  },
+  "empty_example": {
+    "description": "模拟一个所有选项都置空（未选择），只填写了自定义需求的输出结果。在这种情况下，大部分字段因为没有值而不会出现在最终输出中。",
+    "PlayerNeeds_Profile": {
+      "emotion": {
+        "points": [],
+        "flavors": {}
+      },
+      "power": {
+        "objective_spectrum": {
+          "label": "客观权力光谱",
+          "description": "定义PC与核心NPC之间的客观权力高低关系。",
+          "value": ""
+        },
+        "dominant_party": {
+          "label": "主要支配方",
+          "description": "明确关系中的主要支配力量来源。",
+          "value": ""
+        },
+        "dominant_power_sources_points": [],
+        "expression_spectrum": {
+          "label": "权力表达方式光谱",
+          "description": "权力是公开宣告还是秘而不宣。",
+          "value": ""
+        },
+        "importance_spectrum": {
+          "label": "玩家世界重要性光谱",
+          "description": "玩家行动对世界宏观走向的影响力。",
+          "value": ""
+        },
+        "pc_dynamics": {
+          "interaction_strategy": {
+            "label": "互动策略",
+            "description": "PC为达成自身目的所采取的行为策略。",
+            "value": ""
+          },
+          "initial_subjective_state": {
+            "label": "初始主观状态",
+            "description": "PC在故事开始时对权力关系的内心感受。",
+            "value": ""
+          },
+          "target_subjective_state": {
+            "label": "目标主观状态",
+            "description": "PC内心感受将倾向于变化成的目标状态。",
+            "value": ""
+          }
+        },
+        "npc_dynamics": {
+          "interaction_strategy": {
+            "label": "互动策略",
+            "description": "核心NPC为达成自身目的所采取的行为策略原型。",
+            "value": ""
+          },
+          "initial_subjective_state": {
+            "label": "初始主观状态",
+            "description": "核心NPC在故事开始时对权力关系的内心感受原型。",
+            "value": ""
+          },
+          "target_subjective_state": {
+            "label": "目标主观状态",
+            "description": "核心NPC内心感受将倾向于变化成的目标状态原型。",
+            "value": ""
+          }
+        }
+      },
+      "narrative": {
+        "world_harmony_spectrum": {
+          "label": "世界和谐度光谱",
+          "description": "世界整体的和谐/冲突程度。",
+          "value": ""
+        },
+        "npc_compliance_spectrum": {
+          "label": "NPC顺从度光谱",
+          "description": "NPC对玩家行动的顺从/抗拒程度。",
+          "value": ""
+        },
+        "pace_spectrum": {
+          "label": "故事节奏光谱",
+          "description": "故事推进的快慢、紧张/舒缓程度。",
+          "value": ""
+        },
+        "perspective_choice": {
+          "label": "叙事视角选择",
+          "description": "故事采用哪种叙事视角。",
+          "value": ""
+        },
+        "perspective_switching_mode": {
+          "label": "视角切换方式",
+          "description": "叙事过程中视角如何切换。",
+          "value": ""
+        }
+      },
+      "boundaries": {
+        "consent_tolerance_level": {
+          "label": "同意容忍度光谱",
+          "description": "对角色行为边界的容忍度。",
+          "value": ""
+        },
+        "erotic_level": {
+          "label": "色情程度光谱",
+          "description": "故事中允许出现的色情内容程度。",
+          "value": ""
+        },
+        "erotic_focus": {
+          "label": "色情内容聚焦",
+          "description": "色情内容主要聚焦于哪些方面。",
+          "value": ""
+        },
+        "violence_level": {
+          "label": "暴力程度光谱",
+          "description": "故事中允许出现的暴力内容程度。",
+          "value": ""
+        },
+        "violence_focus": {
+          "label": "暴力内容聚焦",
+          "description": "暴力内容主要聚焦于哪些方面。",
+          "value": ""
+        },
+        "description_intensity_spectrum": {
+          "label": "描述强度光谱",
+          "description": "故事中对敏感内容的描述强度。",
+          "value": ""
+        },
+        "consequence_severity_spectrum": {
+          "label": "后果严重性光谱",
+          "description": "角色行为带来的后果严重性。",
+          "value": ""
+        },
+        "likes_tags": [],
+        "dislikes_tags": []
+      },
+      "custom_notes": "请自由发挥，我没有任何特殊要求。"
+    }
+  }
+}

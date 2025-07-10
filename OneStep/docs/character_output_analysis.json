@@ -1,0 +1,156 @@
+{
+  "output_format_description": {
+    "title": "“人物”页面输出格式解析",
+    "description": "当用户点击“生成角色卡”时，“人物”页面的数据会被格式化为一个名为'Character_Profile'的JSON对象，然后由'src/OneStep/app/Formatter.ts'中的'formatCharacterProfileToText'方法转换为最终的文本。该文本块详细定义了故事中的主控角色（PC）、重要角色（Key Characters）和世界人口的构成。",
+    "structure": {
+      "Character_Profile": {
+        "pc": "主控角色的详细设定，包括模板等级、NSFW开关、心理画像、核心价值观和自定义概念。",
+        "key_characters": "一个包含所有重要角色（NPC）的列表。列表中的每个角色都是一个独立的对象，拥有与PC类似的详细设定。这是一个动态列表，可以包含零个或多个角色。",
+        "world_population": "定义非重要角色的宏观设定，分为'supporting'（功能角色）和'ambient'（背景角色组）两部分，主要通过点数分配来确定各类角色的数量。"
+      }
+    },
+    "generation_logic": "格式化程序会遍历'pc'、'key_characters'列表中的每一个角色，以及'world_population'的设定。任何未被用户填写或保持默认空值的字段（如未选择的下拉菜单、空的文本框、为0的点数）在最终的文本输出中都会被忽略，以确保Prompt的简洁和高效。"
+  },
+  "full_example": {
+    "description": "模拟一个所有选项都被详细填写，包含2个重要角色，并且填写了自定义需求的输出结果。",
+    "Character_Profile": {
+      "pc": {
+        "template_level": "深度剖析 (等级4)",
+        "enable_nsfw_attributes": true,
+        "social_class": "上层阶级",
+        "psychological_profile": {
+          "openness": "创意爱好者",
+          "conscientiousness": "高效组织者",
+          "extraversion": "选择性社交者",
+          "agreeableness": "独立主张者",
+          "neuroticism": "偶有波澜者"
+        },
+        "core_values": {
+          "care": "坚定守护者",
+          "fairness": "公正支持者",
+          "loyalty": "实用主义伙伴",
+          "authority": "规则的变通者",
+          "sanctity": "精神追求者",
+          "liberty": "自由的同情者"
+        },
+        "custom_concept": "一位表面上玩世不恭，但内心背负着家族秘密的年轻贵族。"
+      },
+      "key_characters": {
+        "list": [
+          {
+            "id": "uuid-char-1",
+            "template_level": "标准档案 (等级3)",
+            "enable_nsfw_attributes": true,
+            "relational_proximity": "亲密层",
+            "social_class": "劳动阶级",
+            "thematic_role_1": "情感支持锚点",
+            "thematic_role_2": "秘密持有者",
+            "psychological_profile": {
+              "openness": "务实传统派",
+              "conscientiousness": "可靠执行者",
+              "extraversion": "宁静观察者",
+              "agreeableness": "富有同情心者",
+              "neuroticism": "沉稳磐石"
+            },
+            "core_values": {
+              "care": "善良帮助者",
+              "fairness": "契约精神者",
+              "loyalty": "坚定的拥护者",
+              "authority": "守序的公民",
+              "sanctity": "世俗的普通人",
+              "liberty": "务实的个人主义者"
+            },
+            "custom_concept": "主角青梅竹马的侍从，忠诚可靠，但似乎知道一些主角所不知道的往事。"
+          },
+          {
+            "id": "uuid-char-2",
+            "template_level": "深度剖析 (等级4)",
+            "enable_nsfw_attributes": true,
+            "relational_proximity": "社交层",
+            "social_class": "统治阶级",
+            "thematic_role_1": "核心冲突源",
+            "thematic_role_2": "权力游戏对手",
+            "psychological_profile": {
+              "openness": "锐利批评家",
+              "conscientiousness": "完美规划师",
+              "extraversion": "社交核心",
+              "agreeableness": "务实竞争者",
+              "neuroticism": "冷静应对者"
+            },
+            "core_values": {
+              "care": "冷酷功利者",
+              "fairness": "彻底的利己主义者",
+              "loyalty": "机会主义盟友",
+              "authority": "绝对的服从者",
+              "sanctity": "百无禁忌者",
+              "liberty": "支配者"
+            },
+            "custom_concept": "帝国的三皇子，野心勃勃，将主角视为其政治棋盘上的重要棋子，关系亦敌亦友。"
+          }
+        ]
+      },
+      "world_population": {
+        "supporting": {
+          "template_level": "基础骨架 (等级2)",
+          "enable_nsfw_attributes": false,
+          "role_focus_counts": {
+            "目标提供者": 1,
+            "信息与秘密持有者": 2,
+            "服务与资源提供者": 1,
+            "冲突与障碍制造者": 1,
+            "派系与组织代表": 2,
+            "社交与氛围营造者": 1
+          },
+          "custom_notes": "功能角色大多围绕着帝国首都的权力斗争展开。"
+        },
+        "ambient": {
+          "template_level": "核心概念 (等级1)",
+          "enable_nsfw_attributes": false,
+          "group_counts": {
+            "平民阶层": 2,
+            "统治阶层": 3,
+            "商业与行会": 1,
+            "信仰与学术团体": 1,
+            "法外与边缘群体": 2,
+            "流动人口": 1
+          },
+          "custom_notes": "背景人群普遍对贵族阶层怀有敬畏和恐惧。"
+        }
+      }
+    }
+  },
+  "empty_example": {
+    "description": "模拟一个所有选项都置空（未选择），只填写了自定义需求的输出结果。在这种情况下，大部分字段因为没有值而不会出现在最终输出中。",
+    "Character_Profile": {
+      "pc": {
+        "template_level": "",
+        "enable_nsfw_attributes": false,
+        "social_class": "",
+        "psychological_profile": {
+          "openness": "", "conscientiousness": "", "extraversion": "", "agreeableness": "", "neuroticism": ""
+        },
+        "core_values": {
+          "care": "", "fairness": "", "loyalty": "", "authority": "", "sanctity": "", "liberty": ""
+        },
+        "custom_concept": "一个失忆的流浪者，身上唯一的线索是一个奇怪的纹身。"
+      },
+      "key_characters": {
+        "list": []
+      },
+      "world_population": {
+        "supporting": {
+          "template_level": "",
+          "enable_nsfw_attributes": false,
+          "role_focus_counts": {},
+          "custom_notes": "功能角色请AI自由发挥。"
+        },
+        "ambient": {
+          "template_level": "",
+          "enable_nsfw_attributes": false,
+          "group_counts": {},
+          "custom_notes": "背景人群请AI自由发挥。"
+        }
+      }
+    }
+  }
+}

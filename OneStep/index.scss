@@ -1,0 +1,1536 @@
+@use 'sass:color';
+
+// ==========================================================================
+// A.U.TO OneStep - 全局样式表
+// 主题: 金碧山水 (Azure & Gold Landscape)
+// 设计规范: docs/COMPONENT_DESIGN.md
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// 1. 设计令牌 (Design Tokens)
+// --------------------------------------------------------------------------
+
+// 1.1 SASS 色彩变量 (金碧山水主题)
+$color-bg-val: #f7f4ed;
+$color-primary-val: #30626c;
+$color-secondary-val: #6b8e77;
+$color-accent-val: #d4af37;
+$color-text-val: #3d3d3d;
+$color-surface-val: #ffffff;
+$color-disabled-val: #b0b0b0;
+$color-success-val: #5e8c61;
+$color-warning-val: #d9a556;
+$color-error-val: #b85c5c;
+
+:root {
+  // 1.1 配色方案 (CSS 变量)
+  --color-background: #{$color-bg-val};
+  --color-primary: #{$color-primary-val};
+  --color-secondary: #{$color-secondary-val};
+  --color-accent: #{$color-accent-val};
+  --color-text: #{$color-text-val};
+  --color-surface: #{$color-surface-val};
+  --color-disabled: #{$color-disabled-val};
+  --color-success: #{$color-success-val};
+  --color-warning: #{$color-warning-val};
+  --color-error: #{$color-error-val};
+
+  // 1.2 字体
+  --font-family-main: sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  // 1.3 间距
+  --spacing-xs: 4px;
+  --spacing-s: 8px;
+  --spacing-m: 16px;
+  --spacing-l: 24px;
+  --spacing-xl: 32px;
+
+  // 1.4 其他
+  --border-radius: 8px;
+  --shadow-standard: 0 8px 24px rgba(0, 0, 0, 0.05); // Softer shadow
+  --shadow-interactive: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --transition-fast: all 0.2s ease-in-out;
+}
+
+// --------------------------------------------------------------------------
+// 2. 全局重置与基础样式
+// --------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-main);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// --------------------------------------------------------------------------
+// 3. 核心布局结构
+// --------------------------------------------------------------------------
+.onestep-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+}
+
+.onestep-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-secondary);
+  padding-bottom: var(--spacing-m);
+
+  &__main-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+  }
+}
+
+.onestep-global-actions {
+  display: flex;
+  gap: var(--spacing-m);
+  margin-top: var(--spacing-s);
+
+  .btn {
+    // Reset base button styles for a text-link look
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-family-main); // 1. Use same font as title
+    color: var(--color-accent); // 3. Default color to light gold
+    font-size: 16px; // 2. Slightly larger font size
+    font-weight: var(--font-weight-regular);
+    text-decoration: none; // No underline by default
+    border-radius: 0;
+    transition: var(--transition-fast);
+
+    &:hover:not(:disabled) {
+      // Reset other hover effects from base .btn
+      background: none;
+      box-shadow: none;
+      transform: none;
+      color: var(--color-accent); // Keep text color the same
+      // Add colored underline on hover
+      text-decoration: underline;
+      text-decoration-color: var(--color-primary); // 3. Underline color on hover
+    }
+  }
+}
+
+.onestep-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-m);
+  flex-wrap: wrap;
+}
+
+.onestep-page-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xs);
+
+  .btn {
+    font-size: 12px;
+    padding: var(--spacing-xs) var(--spacing-s);
+    min-width: 180px;
+    text-align: center;
+  }
+}
+
+.onestep-main {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-standard);
+  padding: var(--spacing-xl);
+  min-height: 400px;
+  border: none;
+}
+
+.onestep-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-m);
+}
+
+// --------------------------------------------------------------------------
+// 4. 子页面内部结构
+// --------------------------------------------------------------------------
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba($color-primary-val, 0.05);
+  padding: var(--spacing-m);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--color-primary);
+
+  &__info {
+    flex: 1;
+    padding-right: var(--spacing-m);
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-s);
+  }
+
+  &__description {
+    font-size: 14px;
+    color: var(--color-text);
+    font-weight: var(--font-weight-light);
+  }
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+
+  &__title {
+    font-size: 18px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    padding-bottom: var(--spacing-s);
+    border-bottom: 1px solid var(--color-secondary);
+    margin-bottom: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+
+  label {
+    font-weight: var(--font-weight-semibold);
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 14px;
+    font-weight: var(--font-weight-light);
+    color: var(--color-secondary);
+    margin-top: calc(-1 * var(--spacing-s));
+  }
+}
+
+.form-group-inline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-l);
+  width: 100%;
+  margin-bottom: var(--spacing-m);
+}
+
+.form-group-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-l);
+}
+
+@media (max-width: 768px) {
+  .form-group-grid-2col {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-m);
+  }
+}
+
+.controls-inline {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-l);
+  align-items: center;
+  margin-bottom: var(--spacing-s);
+  margin-top: var(--spacing-l); // Increased top margin for more space
+}
+
+.inputs-inline {
+  display: flex;
+  gap: var(--spacing-s);
+  width: 100%;
+  align-items: center;
+
+  & > .form-group {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.form-group--boolean-controlled {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+.boolean-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-s);
+
+  label {
+    order: 2; // Label comes after the switch
+    font-weight: var(--font-weight-regular); // Less prominent than main labels
+  }
+
+  input[type='checkbox'] {
+    // --- Custom Toggle Switch ---
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background-color: var(--color-disabled);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    order: 1; // Switch comes first
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background-color: var(--color-surface);
+      border-radius: 50%;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:checked {
+      background-color: var(--color-primary);
+      &::before {
+        transform: translateX(18px);
+      }
+    }
+  }
+}
+
+.component-help {
+  font-size: 12px;
+  font-weight: var(--font-weight-light);
+  color: var(--color-secondary);
+  margin-top: calc(-1 * var(--spacing-s) + 4px);
+  margin-bottom: var(--spacing-s);
+}
+
+// --------------------------------------------------------------------------
+// 5. 通用组件样式
+// --------------------------------------------------------------------------
+
+// 5.1 按钮 (Buttons)
+.btn {
+  padding: var(--spacing-s) var(--spacing-m);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Final Button System based on "Jinbi Shanshui" Aesthetics
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  border-color: var(--color-primary);
+  &:hover:not(:disabled) {
+    background-color: color.adjust($color-primary-val, $lightness: 10%);
+    box-shadow: var(--shadow-interactive);
+    transform: translateY(-2px);
+  }
+}
+
+.btn--secondary {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  &:hover:not(:disabled) {
+    background-color: rgba($color-primary-val, 0.05);
+    box-shadow: var(--shadow-interactive);
+  }
+}
+
+.btn--accent {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  border-color: var(--color-accent);
+  &:hover:not(:disabled) {
+    background-color: color.adjust($color-accent-val, $lightness: 10%);
+    box-shadow: var(--shadow-interactive);
+  }
+}
+
+.btn--accent-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  &:hover:not(:disabled) {
+    background-color: rgba($color-accent-val, 0.1);
+    box-shadow: var(--shadow-interactive);
+  }
+}
+
+// 5.2 导航按钮 (Nav Buttons)
+.nav-btn {
+  background: none;
+  border: none;
+  padding: var(--spacing-s) var(--spacing-m);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &.active {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    &::after {
+      width: 80%;
+    }
+  }
+}
+
+// 5.3 输入框 & 文本域 (Inputs & Textareas)
+input,
+textarea,
+select,
+.custom-text-input {
+  width: 100%;
+  padding: var(--spacing-s) var(--spacing-m);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 16px;
+  transition: var(--transition-fast);
+
+  &::placeholder {
+    color: var(--color-disabled);
+    font-weight: var(--font-weight-light);
+  }
+
+  &:focus,
+  &:hover {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba($color-primary-val, 0.2);
+  }
+}
+
+textarea {
+  min-height: 40px;
+  resize: none;
+  overflow-y: hidden;
+}
+
+// 5.4 点数分配器 (Points Allocator)
+.points-allocator {
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-m);
+  width: 100%;
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    .point-item-details {
+      display: none;
+    }
+  }
+
+  .allocator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-m);
+  }
+
+  .component-label,
+  .points-remaining {
+    font-size: 16px;
+  }
+
+  .points-remaining {
+    font-weight: var(--font-weight-light);
+    color: var(--color-secondary);
+  }
+
+  .point-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-m);
+  }
+
+  .point-item {
+    flex-grow: 1;
+    flex-basis: 220px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    background-color: rgba($color-primary-val, 0.02);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-s) var(--spacing-m);
+    border: 1px solid rgba($color-primary-val, 0.1);
+  }
+
+  .point-label-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px; // Small gap between label and description
+  }
+
+  .point-label {
+    font-weight: var(--font-weight-regular);
+  }
+
+  .point-description {
+    font-size: 12px;
+    font-weight: var(--font-weight-light);
+    color: var(--color-secondary);
+    line-height: 1.3;
+  }
+
+  .point-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+  }
+
+  .point-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .point-value {
+    font-size: 16px;
+    min-width: 2ch;
+    text-align: center;
+  }
+
+  .point-item-details {
+    padding-top: var(--spacing-m);
+    margin-top: var(--spacing-m);
+    border-top: 1px solid rgba($color-secondary-val, 0.2);
+    width: 100%;
+  }
+}
+
+// 5.5 标签选择器 (Tag Selector)
+.tag-selector {
+  .tag-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+  .category-name {
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-s);
+  }
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+  }
+  .tag-btn {
+    background-color: rgba($color-secondary-val, 0.1);
+    color: var(--color-secondary);
+    padding: var(--spacing-xs) var(--spacing-s);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: rgba($color-secondary-val, 0.2);
+    }
+
+    &.selected {
+      background-color: var(--color-secondary);
+      color: var(--color-surface);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+}
+
+// --- Custom Dropdown Component ---
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+
+  &__selected {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-s) var(--spacing-m);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-s);
+    font-size: 16px;
+    min-width: unset;
+    min-height: unset;
+    justify-content: flex-start;
+    text-align: left;
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba($color-primary-val, 0.2);
+    }
+
+    .selected-label {
+      font-weight: var(--font-weight-semibold);
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .selected-description {
+      font-size: 12px;
+      font-weight: var(--font-weight-light);
+      color: var(--color-secondary);
+      white-space: normal;
+      line-height: 1.3;
+    }
+  }
+
+  &__options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius);
+    list-style: none;
+    margin-top: var(--spacing-xs);
+    padding: var(--spacing-s) 0;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: var(--shadow-standard);
+  }
+
+  &.open &__options {
+    display: block;
+  }
+
+  &__option {
+    padding: var(--spacing-s) var(--spacing-m);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-s);
+    font-size: 16px;
+    justify-content: flex-start;
+    text-align: left;
+    transition: background-color 0.2s ease;
+
+    .option-label {
+      font-weight: var(--font-weight-regular);
+      flex-shrink: 0;
+    }
+
+    .option-description {
+      font-size: 12px;
+      font-weight: var(--font-weight-light);
+      color: var(--color-secondary);
+      white-space: normal;
+      line-height: 1.3;
+    }
+
+    &:hover,
+    &.selected {
+      background-color: rgba($color-primary-val, 0.1);
+    }
+  }
+
+  &.dropdown-primary .custom-dropdown__selected,
+  &.dropdown-secondary .custom-dropdown__selected {
+    padding: 2px 10px;
+    font-size: 13px;
+    min-width: 80px;
+    min-height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+  &.dropdown-primary .custom-dropdown__option,
+  &.dropdown-secondary .custom-dropdown__option {
+    padding: 2px 10px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+  &.dropdown-primary .custom-dropdown__selected .selected-label,
+  &.dropdown-secondary .custom-dropdown__selected .selected-label {
+    font-size: 13px;
+  }
+  &.dropdown-primary .custom-dropdown__selected .selected-description,
+  &.dropdown-secondary .custom-dropdown__selected .selected-description {
+    font-size: 11px;
+  }
+  &.dropdown-primary .custom-dropdown__option .option-description,
+  &.dropdown-secondary .custom-dropdown__option .option-description {
+    font-size: 11px;
+  }
+  &.dropdown-primary .custom-dropdown__selected {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
+  }
+  &.dropdown-primary .custom-dropdown__option.selected {
+    background-color: rgba($color-primary-val, 0.2);
+    color: var(--color-primary);
+  }
+  &.dropdown-secondary .custom-dropdown__selected {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  &.dropdown-secondary .custom-dropdown__option.selected {
+    background-color: rgba($color-primary-val, 0.08);
+    color: var(--color-primary);
+  }
+}
+
+.custom-dropdown--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.point-item-separator {
+  width: 100%;
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary);
+  padding: var(--spacing-m) 0 var(--spacing-s) 0;
+  margin-top: var(--spacing-m);
+  border-top: 1px solid var(--color-secondary);
+}
+
+.points-allocator--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.list-item__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-m);
+  gap: var(--spacing-m);
+}
+
+.list-item-card {
+  position: relative;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-m);
+  margin-top: var(--spacing-m);
+  background-color: rgba($color-primary-val, 0.02);
+}
+
+.numeric-stepper {
+  display: inline-flex; /* Changed from flex to allow centering */
+  align-items: center;
+  gap: var(--spacing-s);
+  width: 100%; /* Let container control width */
+
+  input[type='number'] {
+    text-align: center;
+    -moz-appearance: textfield; /* Firefox */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .stepper-btn {
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover:not(:disabled) {
+      background-color: rgba($color-primary-val, 0.1);
+    }
+  }
+}
+
+.range-input {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  width: 100%;
+
+  .numeric-stepper {
+    flex: 1;
+    min-width: 0; /* Allow shrinking */
+  }
+
+  .range-separator {
+    flex-shrink: 0; /* Prevent separator from shrinking */
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+  }
+}
+
+.btn-close {
+  position: absolute;
+  top: var(--spacing-s);
+  right: var(--spacing-s);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-error);
+  color: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: var(--transition-fast);
+  vertical-align: middle;
+}
+.btn-close span,
+.btn-close .icon,
+.btn-close svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+  line-height: inherit;
+}
+.btn-close:hover {
+  background-color: color.adjust($color-error-val, $lightness: 10%);
+}
+
+// 5.6 三态标签选择器 (Tri-State Tag Selector)
+.tri-state-tag-selector {
+  .tag-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+  .category-name {
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-s);
+  }
+  .tag-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-m);
+  }
+  .tri-state-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba($color-secondary-val, 0.05);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-s) var(--spacing-m);
+    transition: background-color 0.2s ease;
+
+    &.preference-like {
+      background-color: rgba($color-success-val, 0.1);
+    }
+    &.preference-dislike {
+      background-color: rgba($color-error-val, 0.1);
+    }
+  }
+  .tag-label {
+    flex: 1;
+    padding-right: var(--spacing-m);
+  }
+  .tag-controls {
+    display: flex;
+    gap: var(--spacing-s);
+  }
+  .tag-pref-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--color-secondary);
+    background-color: transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    &.like.selected {
+      background-color: var(--color-success);
+      border-color: var(--color-success);
+      color: var(--color-surface);
+    }
+    &.dislike.selected {
+      background-color: var(--color-error);
+      border-color: var(--color-error);
+      color: var(--color-surface);
+    }
+    &.neutral.selected {
+      background-color: var(--color-warning);
+      border-color: var(--color-warning);
+      color: var(--color-surface);
+    }
+
+    &:not(.selected):hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+}
+
+// --- Ensure other components take full width ---
+.tag-selector,
+.tri-state-tag-selector,
+.object-list-editor,
+.form-group:has(textarea) {
+  flex-basis: 100%;
+}
+
+// 5.7 Dynamic Points Allocator
+.dynamic-points-allocator {
+  .dpa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-m);
+  }
+
+  .dpa-controls {
+    display: flex;
+    flex-direction: column; // Each group on a new line
+    gap: var(--spacing-m);
+    margin-bottom: var(--spacing-m);
+  }
+
+  .dpa-group {
+    display: flex;
+    gap: var(--spacing-s);
+    align-items: center;
+
+    select {
+      flex: 1; // Allow selects to grow
+    }
+
+    .btn {
+      flex-shrink: 0; // Prevent button from shrinking
+    }
+  }
+
+  .dpa-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+
+  .dpa-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba($color-primary-val, 0.02);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-s) var(--spacing-m);
+    border: 1px solid rgba($color-primary-val, 0.1);
+  }
+
+  .dpa-item__label {
+    flex: 1;
+    font-weight: var(--font-weight-regular);
+  }
+
+  .dpa-item__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+  }
+}
+.point-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  // Inherit button styles
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+
+  &:hover:not(:disabled) {
+    background-color: rgba($color-primary-val, 0.1);
+  }
+
+  &.plus {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: var(--color-disabled);
+    border-color: var(--color-disabled);
+  }
+}
+
+// 5.8 Condition Builder
+.condition-builder {
+  .condition-builder__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    width: 100%;
+  }
+
+  .condition-operator-select {
+    flex-basis: 200px;
+    flex-shrink: 0;
+  }
+
+  .condition-value-wrapper,
+  .condition-range-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    flex-grow: 1;
+  }
+
+  .range-separator {
+    flex-shrink: 0;
+    padding: 0 var(--spacing-s);
+  }
+}
+
+// 5.9 Worldview Page Styles
+.worldview-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-l);
+}
+
+.worldview-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-fast);
+
+  &--disabled {
+    background-color: rgba($color-disabled-val, 0.1);
+    border-color: rgba($color-disabled-val, 0.5);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-m);
+    border-bottom: 1px solid var(--color-secondary);
+
+    &--no-controls {
+      justify-content: flex-start;
+    }
+  }
+
+  &.collapsed &__header {
+    border-bottom: none;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+  }
+
+  &__body {
+    padding: var(--spacing-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l);
+    position: relative; // For footer collapse button
+  }
+
+  &__macro-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l);
+  }
+
+  &__specific-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+
+  &__add-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-s);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-m);
+    border-top: 1px solid rgba($color-secondary-val, 0.2);
+    padding-top: var(--spacing-m);
+    background: none;
+    box-shadow: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+}
+
+.worldview-card__add-buttons .btn {
+  min-width: 110px;
+  width: 110px;
+  height: 28px;
+  font-size: 13px;
+  padding: 2px 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.worldview-card__add-buttons .btn--secondary {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  border-color: var(--color-accent);
+  transition: var(--transition-fast);
+}
+
+.worldview-card__add-buttons .btn--secondary:hover:not(:disabled) {
+  background-color: color.adjust($color-accent-val, $lightness: 10%);
+  box-shadow: var(--shadow-interactive);
+  transform: translateY(-2px);
+}
+
+.worldview-card__add-buttons .btn .icon {
+  margin-right: 4px;
+  font-size: 18px;
+  display: inline-block;
+}
+
+.specific-item-card {
+  background-color: rgba($color-primary-val, 0.03);
+  border: 1px solid rgba($color-primary-val, 0.1);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  position: relative;
+  padding: 0; // Remove padding, header/body will handle it
+}
+
+// New Header for Key Character Card
+.specific-item-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: var(--spacing-s) var(--spacing-m);
+  background-color: rgba($color-primary-val, 0.05);
+  border-bottom: 1px solid rgba($color-primary-val, 0.1);
+  cursor: default;
+}
+
+.specific-item-card__title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.specific-item-card__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+}
+
+.card-control-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-secondary);
+  background-color: transparent;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 16px;
+
+  &:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: rgba($color-primary-val, 0.1);
+  }
+
+  &.delete-btn {
+    font-size: 22px;
+    line-height: 1;
+    border-color: var(--color-error);
+    color: var(--color-error);
+    &:hover {
+      background-color: rgba($color-error-val, 0.1);
+    }
+  }
+}
+
+// Lock Button Icon (CSS)
+.lock-btn .icon {
+  width: 12px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    border: 2px solid currentColor;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    top: -6px;
+    left: 0;
+  }
+}
+
+.key-character-card.is-locked .lock-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+  .icon {
+    background-color: currentColor;
+  }
+}
+
+// Random Button Icon (CSS Dice)
+.random-btn .icon {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  position: relative;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+  &::before {
+    top: 2px;
+    left: 2px;
+  }
+  &::after {
+    bottom: 2px;
+    right: 2px;
+  }
+}
+
+// Body and Collapse/Expand Logic
+.specific-item-card__body {
+  padding: var(--spacing-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  opacity: 1;
+  max-height: 2000px; // Arbitrary large value
+  position: relative; // For footer collapse button
+}
+
+.specific-item-card.is-collapsed {
+  .specific-item-card__body {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+  .specific-item-card__header {
+    border-bottom-color: transparent;
+  }
+  overflow: hidden; // Apply overflow hidden only when collapsed
+}
+
+// Locked state overlay
+.specific-item-card.is-locked .specific-item-card__body {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+// --- Rules Page Card Overrides ---
+.rules-item-card {
+  // Override the default list-item-card padding
+  padding: 0;
+
+  .specific-item-card__body {
+    padding: var(--spacing-m);
+  }
+
+  // Ensure nested lists don't have extra card backgrounds
+  .nested-object-list-editor {
+    .specific-item-card {
+      background-color: rgba($color-primary-val, 0.03);
+      border: 1px solid rgba($color-primary-val, 0.1);
+    }
+  }
+}
+
+// Add spacing between nested cards in the Rules page
+.nested-object-list-editor .list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+// 5.7 Dynamic Points Allocator (Refactored for Aesthetics)
+.dynamic-points-allocator {
+  .dpa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-m);
+  }
+
+  .dpa-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+    margin-bottom: var(--spacing-m);
+    padding-bottom: var(--spacing-m);
+    border-bottom: 1px solid var(--color-secondary);
+  }
+
+  .dpa-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--spacing-s);
+    align-items: center;
+
+    select {
+      flex: 1;
+    }
+
+    .btn {
+      flex-shrink: 0;
+    }
+  }
+
+  .dpa-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+
+  .dpa-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: rgba($color-primary-val, 0.02);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-m);
+    border: 1px solid rgba($color-primary-val, 0.1);
+  }
+
+  .dpa-item__label {
+    flex: 1;
+    padding-right: var(--spacing-m);
+
+    strong {
+      display: block;
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--spacing-xs);
+    }
+    p {
+      font-size: 14px;
+      color: var(--color-secondary);
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+
+  .dpa-item__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+  }
+}
+
+// ==========================================================================
+// Page-Specific Overrides & Component-Specific Fixes
+// ==========================================================================
+
+// --- Dropdown Height Alignment Fix ---
+// This class is applied directly to dropdown components that need a fixed
+// height to ensure visual alignment, regardless of their content length.
+.fixed-height-dropdown .custom-dropdown__selected {
+  height: 48px;
+}
+
+.fixed-height-dropdown .selected-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// --- Rules Page Button Size Fix ---
+// This adjusts the "Add" buttons within the nested list editor on the Rules
+// page to match the smaller style used on other pages (e.g., Plot page).
+.nested-object-list-editor .list-item__controls .btn.add-main-item-btn {
+  min-width: 110px;
+  width: 110px;
+  height: 28px;
+  font-size: 13px;
+  padding: 2px 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+// 5.10 Card Footer Collapse Button
+.card-collapse-footer-btn {
+  position: absolute;
+  bottom: 2px; // Lifted from the edge for a floating effect
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 8px; // Made shorter
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.3;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 5;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2)); // Add shadow for floating effect
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 8px solid var(--color-secondary); // Made shorter
+  }
+
+  &:hover {
+    opacity: 0.7;
+    transform: translateX(-50%) translateY(-2px); // Slight lift on hover
+  }
+}

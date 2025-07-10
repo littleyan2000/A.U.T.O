@@ -1,0 +1,98 @@
+{
+  "output_format_description": {
+    "title": "“规则”页面输出格式解析",
+    "description": "当用户点击“生成角色卡”时，“规则”页面的数据会被格式化为一个名为'Rulebook_Profile'的JSON对象，然后由'src/OneStep/app/Formatter.ts'中的'formatRulesProfileToText'方法转换为最终的文本。该文本块定义了世界的“物理法则”和“因果逻辑”，为叙事提供动态的、可追踪的机制。",
+    "structure": {
+      "Rulebook_Profile": {
+        "trackers": "一个“状态追踪器”对象数组。每个追踪器都是一个可量化的数值（如好感度、理智值），并包含其变化规则和效果阈值。",
+        "descriptors": "一个“叙事描述符”对象数组。每个描述符是一个赋予角色或物品的非数值化“标签”（如“过目不忘”、“被诅咒的”），作为AI进行逻辑判断的锚点。",
+        "causal_triggers": "一个“因果触发器”对象数组。每个触发器是一个拥有独立状态和规则的“微型系统”（如“瘟疫蔓延系统”、“政治声望系统”），用于模拟复杂的世界变化。",
+        "custom_notes": "用户对规则系统的任何额外、自定义的需求。"
+      }
+    },
+    "generation_logic": "格式化程序会遍历'trackers'、'descriptors'和'causal_triggers'三个列表。任何未被用户填写或保持默认空值的字段（如空的文本框、未添加的列表项）在最终的文本输出中都会被忽略，以确保Prompt的简洁和高效。"
+  },
+  "full_example": {
+    "description": "模拟一个所有选项都被详细填写，包含多种类型的追踪器、描述符和触发器的输出结果。",
+    "Rulebook_Profile": {
+      "trackers": [
+        {
+          "id": "uuid-tracker-1",
+          "name": "主角理智值",
+          "type": "递减的，有下限",
+          "scope": "主角",
+          "default_difficulty": "标准",
+          "description": "衡量主角在面对超自然事件时的精神稳定度，初始为100，下限为0。",
+          "thresholds": [
+            {
+              "condition": "值 <= 50",
+              "effect": "主角开始看到轻微的幻觉。"
+            },
+            {
+              "condition": "值 <= 20",
+              "effect": "主角会产生严重的幻听和幻视，可能在对话中说出不连贯的话。"
+            }
+          ],
+          "difficulty_overrides": [],
+          "is_collapsed": false,
+          "is_locked": false
+        }
+      ],
+      "descriptors": [
+        {
+          "id": "uuid-desc-1",
+          "name": "神圣祝福",
+          "type": "增益",
+          "scope": "主角",
+          "narrative_effect": "持有此描述符的角色在对抗亡灵单位时，攻击会附加神圣伤害。",
+          "is_collapsed": false,
+          "is_locked": true
+        }
+      ],
+      "causal_triggers": [
+        {
+          "id": "uuid-trigger-1",
+          "system_name": "城市恐慌指数",
+          "scope": "世界",
+          "core_concept": "一个衡量城市居民因连续神秘事件而产生的恐慌程度的系统。",
+          "states": [
+            {
+              "state_name": "平静",
+              "description": "市民生活正常，秩序井然。"
+            },
+            {
+              "state_name": "警惕",
+              "description": "出现宵禁，卫兵加强巡逻，街上流言四起。"
+            },
+            {
+              "state_name": "混乱",
+              "description": "发生抢劫和暴乱，市民紧闭门窗，军队介入维持秩序。"
+            }
+          ],
+          "rules": [
+            {
+              "trigger_condition": "当“主角理智值”首次低于50时",
+              "consequence": "城市恐慌指数从“平静”变为“警惕”。"
+            },
+            {
+              "trigger_condition": "当城内发生谋杀案时",
+              "consequence": "城市恐慌指数有50%的几率提升一个等级。"
+            }
+          ],
+          "is_collapsed": false,
+          "is_locked": false
+        }
+      ],
+      "custom_notes": "所有规则的判定都应在后台静默进行，只在叙事中体现其结果，不要直接告诉玩家数值变化。"
+    }
+  },
+  "empty_example": {
+    "description": "模拟一个所有列表都为空，只填写了自定义需求的输出结果。在这种情况下，只有'custom_notes'会出现在最终输出中。",
+    "Rulebook_Profile": {
+      "trackers": [],
+      "descriptors": [],
+      "causal_triggers": [],
+      "custom_notes": "请AI根据故事发展，自行判断是否需要引入临时的规则或状态，无需严格限制。"
+    }
+  }
+}

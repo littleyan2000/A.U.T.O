@@ -1,0 +1,132 @@
+{
+  "PlayerNeeds_Profile": {
+    "emotion": {
+      "points": [],
+      "flavors": {}
+    },
+    "power": {
+      "objective_spectrum": {
+        "label": "客观权力光谱",
+        "description": "定义PC与核心NPC之间的客观权力高低关系。",
+        "value": ""
+      },
+      "dominant_party": {
+        "label": "主要支配方",
+        "description": "明确关系中的主要支配力量来源。",
+        "value": ""
+      },
+      "dominant_power_sources_points": [],
+      "expression_spectrum": {
+        "label": "权力表达方式光谱",
+        "description": "权力是公开宣告还是秘而不宣。",
+        "value": ""
+      },
+      "importance_spectrum": {
+        "label": "玩家世界重要性光谱",
+        "description": "玩家行动对世界宏观走向的影响力。",
+        "value": ""
+      },
+      "pc_dynamics": {
+        "interaction_strategy": {
+          "label": "互动策略",
+          "description": "PC为达成自身目的所采取的行为策略。",
+          "value": ""
+        },
+        "initial_subjective_state": {
+          "label": "初始主观状态",
+          "description": "PC在故事开始时对权力关系的内心感受。",
+          "value": ""
+        },
+        "target_subjective_state": {
+          "label": "目标主观状态",
+          "description": "PC内心感受将倾向于变化成的目标状态。",
+          "value": ""
+        }
+      },
+      "npc_dynamics": {
+        "interaction_strategy": {
+          "label": "互动策略",
+          "description": "核心NPC为达成自身目的所采取的行为策略原型。",
+          "value": ""
+        },
+        "initial_subjective_state": {
+          "label": "初始主观状态",
+          "description": "核心NPC在故事开始时对权力关系的内心感受原型。",
+          "value": ""
+        },
+        "target_subjective_state": {
+          "label": "目标主观状态",
+          "description": "核心NPC内心感受将倾向于变化成的目标状态原型。",
+          "value": ""
+        }
+      }
+    },
+    "narrative": {
+      "world_harmony_spectrum": {
+        "label": "世界和谐度光谱",
+        "description": "世界整体的和谐/冲突程度。",
+        "value": ""
+      },
+      "npc_compliance_spectrum": {
+        "label": "NPC顺从度光谱",
+        "description": "NPC对玩家行动的顺从/抗拒程度。",
+        "value": ""
+      },
+      "pace_spectrum": {
+        "label": "故事节奏光谱",
+        "description": "故事推进的快慢、紧张/舒缓程度。",
+        "value": ""
+      },
+      "perspective_choice": {
+        "label": "叙事视角选择",
+        "description": "故事采用哪种叙事视角。",
+        "value": ""
+      },
+      "perspective_switching_mode": {
+        "label": "视角切换方式",
+        "description": "叙事过程中视角如何切换。",
+        "value": ""
+      }
+    },
+    "boundaries": {
+      "consent_tolerance_level": {
+        "label": "同意容忍度光谱",
+        "description": "对角色行为边界的容忍度。",
+        "value": ""
+      },
+      "erotic_level": {
+        "label": "色情程度光谱",
+        "description": "故事中允许出现的色情内容程度。",
+        "value": ""
+      },
+      "erotic_focus": {
+        "label": "色情内容聚焦",
+        "description": "色情内容主要聚焦于哪些方面。",
+        "value": ""
+      },
+      "violence_level": {
+        "label": "暴力程度光谱",
+        "description": "故事中允许出现的暴力内容程度。",
+        "value": ""
+      },
+      "violence_focus": {
+        "label": "暴力内容聚焦",
+        "description": "暴力内容主要聚焦于哪些方面。",
+        "value": ""
+      },
+      "description_intensity_spectrum": {
+        "label": "描述强度光谱",
+        "description": "故事中对敏感内容的描述强度。",
+        "value": ""
+      },
+      "consequence_severity_spectrum": {
+        "label": "后果严重性光谱",
+        "description": "角色行为带来的后果严重性。",
+        "value": ""
+      },
+      "likes_tags": [],
+      "dislikes_tags": []
+    },
+    "custom_notes": ""
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "output_format_description": {
+    "title": "“文风”页面输出格式解析",
+    "description": "当用户点击“生成角色卡”时，“文风”页面的数据会被格式化为一个名为'WritingStyle_Profile'的JSON对象，然后由'src/OneStep/app/Formatter.ts'中的'formatStyleProfileToText'方法转换为最终的文本。该文本块定义了AI在叙事时应采用的文风。",
+    "structure": {
+      "WritingStyle_Profile": {
+        "mode": "包含模式选择（selection）和参考文风（reference_material）的对象。",
+        "adjustments": "包含所有核心调整项的对象，如叙事者姿态、语言质感、感官通道点数分配和自定义备注。",
+        "custom_notes": "用户对文风的任何额外、自定义的需求。"
+      }
+    },
+    "generation_logic": "格式化程序会处理'mode'和'adjustments'中的所有数据。任何未被用户填写或保持默认空值的字段（如空的文本框、为0的点数、未选择的光谱选项）在最终的文本输出中都会被忽略，以确保Prompt的简洁和高效。"
+  },
+  "full_example": {
+    "description": "模拟一个所有选项都被详细填写，并且包含自定义需求的输出结果。",
+    "WritingStyle_Profile": {
+      "mode": {
+        "selection": "融合参考文风与核心调整",
+        "reference_material": "“落日熔金，暮云合璧，人在何处？染柳烟浓，吹梅笛怨，春意知几许。”"
+      },
+      "adjustments": {
+        "narrator_stance_spectrum": "4/7: 旁观记录者: 叙事者以客观、中立的口吻讲述故事，不带个人情感色彩。",
+        "linguistic_texture_spectrum": "6/7: 华丽典雅: 语言精致、富有文采，多使用复杂的句式和修辞手法。",
+        "descriptive_focus_spectrum": "3/7: 心理聚焦: 侧重于描绘角色的内心活动、情感变化和心理状态。",
+        "rhetorical_strategy_spectrum": "5/7: 暗示与象征: 倾向于使用隐喻、象征等手法，让读者自行解读深层含义。",
+        "syntactic_rhythm_spectrum": "4/7: 长短句交错: 句式长短结合，富有节奏感和变化。",
+        "sensory_channels_points": {
+          "视觉 (Vision)": 4,
+          "听觉 (Hearing)": 2,
+          "嗅觉/味觉 (Smell/Taste)": 1,
+          "触觉/体感 (Touch/Kinaesthetics)": 1,
+          "性器官/第二性征 (Sex organs/secondary sex characteristics)": 0,
+          "内在感受/直觉 (Internal Sensation/Intuition)": 2
+        },
+        "custom_notes": "希望文笔有古典韵味，同时保持叙事的清晰流畅。"
+      }
+    }
+  },
+  "empty_example": {
+    "description": "模拟一个所有选项都置空（未选择），只填写了自定义需求的输出结果。在这种情况下，大部分字段因为没有值而不会出现在最终输出中。",
+    "WritingStyle_Profile": {
+      "mode": {
+        "selection": "",
+        "reference_material": ""
+      },
+      "adjustments": {
+        "narrator_stance_spectrum": "",
+        "linguistic_texture_spectrum": "",
+        "descriptive_focus_spectrum": "",
+        "rhetorical_strategy_spectrum": "",
+        "syntactic_rhythm_spectrum": "",
+        "sensory_channels_points": {},
+        "custom_notes": "请AI自由发挥文风。"
+      }
+    }
+  }
+}

@@ -1,0 +1,430 @@
+{
+  "modules": {
+    "aesthetics": {
+      "id": "aesthetics",
+      "title": "1. 美学与基调",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "基石文化与美学滤镜",
+          "type": "dynamic_points_allocator",
+          "value": [
+            {
+              "id": "steampunk",
+              "label": "蒸汽朋克",
+              "description": "维多利亚时代的背景，以蒸汽驱动的机械、齿轮与黄铜为标志。",
+              "points": 7,
+              "source": "culture"
+            },
+            {
+              "id": "dieselpunk",
+              "label": "柴油朋克",
+              "description": "受两次世界大战期间美学启发，充满内燃机、重型机械与装饰艺术。",
+              "points": 3,
+              "source": "filter"
+            }
+          ]
+        },
+        {
+          "label": "美学要素权重 (10点影响力)",
+          "type": "points_allocator",
+          "value": [
+            {
+              "label": "实用/工业",
+              "points": 4,
+              "description": "功能至上，暴露结构和管道，充满金属和混凝土的粗犷感。"
+            },
+            {
+              "label": "精巧/繁复",
+              "points": 2,
+              "description": "充满复杂的细节、雕刻和装饰，如巴洛克或哥特式建筑。"
+            },
+            {
+              "label": "机械/齿轮",
+              "points": 3,
+              "description": "以齿轮、活塞、蒸汽管道、铆钉等工业机械元素为核心的装饰。"
+            },
+            {
+              "label": "华丽/油画感",
+              "points": 1,
+              "description": "使用丰富、深邃、高饱和的色彩组合，如宝石红、天鹅绒蓝和金色，营造奢华、古典和戏剧感。"
+            }
+          ]
+        }
+      ],
+      "specific_items": []
+    },
+    "geography": {
+      "id": "geography",
+      "title": "2. 空间与边界",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "世界尺度",
+          "type": "dropdown",
+          "value": "中型世界",
+          "description": "一个完整的国家或广阔地区。"
+        },
+        {
+          "label": "外部关联性",
+          "type": "dropdown",
+          "value": "稳定互通",
+          "description": "有固定的商路、航线，常规交流。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-location-1",
+          "type": "location",
+          "name": "铁之心城 (Ironheart City)",
+          "description": "帝国的工业中心，巨大的齿轮和蒸汽管道构成了城市的天际线。",
+          "category": "city"
+        }
+      ]
+    },
+    "history": {
+      "id": "history",
+      "title": "3. 历史与时代",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "当前历史状态",
+          "type": "dropdown",
+          "value": "扩张纪元",
+          "description": "文明蓬勃发展，充满探索与机遇。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-event-1",
+          "type": "event",
+          "name": "大发明家博览会",
+          "description": "每十年举办一次，展示帝国最前沿的蒸汽科技发明。",
+          "category": "cultural"
+        }
+      ]
+    },
+    "species": {
+      "id": "species",
+      "title": "4. 居民与种族",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "种族构成",
+          "type": "dropdown",
+          "value": "多种族共存",
+          "description": "多个智慧种族并存，关系多样。"
+        },
+        {
+          "label": "核心关系",
+          "type": "dropdown",
+          "value": "冷战对峙",
+          "description": "种族间互相猜忌，处于紧张的对峙状态。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-species-1",
+          "type": "species",
+          "name": "发条人 (Clockwork Automaton)",
+          "description": "由精密齿轮和发条构成的机械生命，是优秀的工匠和士兵，但缺乏情感。",
+          "category": "construct"
+        }
+      ]
+    },
+    "magic": {
+      "id": "magic",
+      "title": "5. 力量与超凡",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "最高水平",
+          "type": "dropdown",
+          "value": "等级 4: 系统化魔法",
+          "description": "超自然力量被系统化、普及化，存在魔法、修炼等体系。"
+        },
+        {
+          "label": "最低水平",
+          "type": "dropdown",
+          "value": "等级 2: 罕见奇迹",
+          "description": "偶尔出现不可解释的奇迹或异象，但极为罕见。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "信仰/组织限定",
+          "description": "特定宗教或组织才能掌握。"
+        },
+        {
+          "label": "力量来源 (10点影响力)",
+          "type": "points_allocator",
+          "value": [
+            {
+              "label": "知识/仪式",
+              "points": 5,
+              "description": "通过学习知识、掌握仪式、咒语等获得力量。"
+            },
+            {
+              "label": "物品/圣物",
+              "points": 5,
+              "description": "依靠神器、圣物、魔法物品等外物获得力量。"
+            }
+          ]
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-powersystem-1",
+          "type": "powersystem",
+          "name": "符文工程学",
+          "description": "将魔法符文蚀刻在机械上，使其获得超自然能力的学科。",
+          "category": "thaumaturgy"
+        }
+      ]
+    },
+    "technology": {
+      "id": "technology",
+      "title": "6. 技术与造物",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "最高水平",
+          "type": "dropdown",
+          "value": "等级 4: 工业革命",
+          "description": "蒸汽机、电力、机械化生产，工业体系初步建立。"
+        },
+        {
+          "label": "最低水平",
+          "type": "dropdown",
+          "value": "等级 2: 青铜/铁器",
+          "description": "掌握金属冶炼与工具制造，出现青铜器和铁器。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "中心辐射",
+          "description": "从中心点向外围逐渐减弱。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-tech-1",
+          "type": "tech",
+          "name": "差分机",
+          "description": "巨大的黄铜计算机器，用于处理复杂的运算，是帝国行政和军事的核心。",
+          "category": "information"
+        }
+      ]
+    },
+    "factions": {
+      "id": "factions",
+      "title": "7. 势力与组织",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "权力结构",
+          "type": "dropdown",
+          "value": "强国林立",
+          "description": "多个强大国家或势力并存，争霸天下。"
+        },
+        {
+          "label": "最高秩序水平",
+          "type": "dropdown",
+          "value": "等级 5: 法制健全",
+          "description": "法制健全，社会秩序良好，权力结构稳定。"
+        },
+        {
+          "label": "最低秩序水平",
+          "type": "dropdown",
+          "value": "等级 2: 部落/帮派",
+          "description": "以部落、帮派为单位，规则松散，靠个人或小团体维系秩序。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "地缘对立",
+          "description": "高低水平分布在不同地理区域。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-faction-1",
+          "type": "faction",
+          "name": "皇家发明家协会",
+          "description": "帝国的官方科研机构，垄断了最尖端的符文工程学技术。",
+          "category": "academic"
+        }
+      ]
+    },
+    "economy": {
+      "id": "economy",
+      "title": "8. 经济与资源",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "最高资源丰裕度",
+          "type": "dropdown",
+          "value": "等级 5: 物产丰富",
+          "description": "资源丰富，生活质量较高。"
+        },
+        {
+          "label": "最低资源丰裕度",
+          "type": "dropdown",
+          "value": "等级 3: 资源稀缺",
+          "description": "资源有限，需精打细算才能维持生活。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "阶级垄断",
+          "description": "高水平被上层阶级垄断。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-resource-1",
+          "type": "resource",
+          "name": "以太水晶 (Aetherium)",
+          "description": "驱动符文工程学的核心能源，产量稀少，被皇家严格管控。",
+          "category": "magical"
+        }
+      ]
+    },
+    "faith": {
+      "id": "faith",
+      "title": "9. 信仰与哲学",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "哲学与信仰构成 (10点影响力)",
+          "type": "points_allocator",
+          "value": [
+            {
+              "label": "功利/实用主义",
+              "points": 6,
+              "description": "以实际利益和效果为最高准则。"
+            },
+            {
+              "label": "无神/人本主义",
+              "points": 4,
+              "description": "否认神明存在，强调人类自身价值。"
+            }
+          ]
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-belief-1",
+          "type": "belief",
+          "name": "理性至上",
+          "description": "一种认为宇宙万物都可以通过科学和逻辑来解释的哲学思潮。",
+          "category": "philosophy"
+        }
+      ]
+    },
+    "culture": {
+      "id": "culture",
+      "title": "10. 文化与习俗",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "社会结构组成 (10点影响力)",
+          "type": "points_allocator",
+          "value": [
+            {
+              "label": "英才制",
+              "points": 5,
+              "description": "以能力、才华、成就为社会晋升标准。"
+            },
+            {
+              "label": "行会/辛迪加制",
+              "points": 5,
+              "description": "由行业、工会、辛迪加等组织主导社会。"
+            }
+          ]
+        },
+        {
+          "label": "最高道德/伦理观念",
+          "type": "dropdown",
+          "value": "等级 3: 契约/律法",
+          "description": "重视契约和法律，社会以规则为基础。"
+        },
+        {
+          "label": "最低道德/伦理观念",
+          "type": "dropdown",
+          "value": "等级 2: 荣誉/功利",
+          "description": "以荣誉、功利为核心，道德观念较为功利化。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "阶级垄断",
+          "description": "高水平被上层阶级垄断。"
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-class-1",
+          "type": "class",
+          "name": "工匠大师",
+          "description": "掌握顶尖技艺的工匠，社会地位崇高，拥有自己的行会。",
+          "category": "upper"
+        }
+      ]
+    },
+    "desire": {
+      "id": "desire",
+      "title": "11. 性爱与情欲",
+      "status": "editing",
+      "macro_selections": [
+        {
+          "label": "最高开放度",
+          "type": "dropdown",
+          "value": "等级 3: 保守主义",
+          "description": "性观念较为保守，但有一定包容度。"
+        },
+        {
+          "label": "最低开放度",
+          "type": "dropdown",
+          "value": "等级 2: 严格压抑",
+          "description": "性观念极为保守，公开表达受到严格限制。"
+        },
+        {
+          "label": "分布模式",
+          "type": "dropdown",
+          "value": "阶级垄断",
+          "description": "高水平被上层阶级垄断。"
+        },
+        {
+          "label": "主流文化视角（10点分配）",
+          "type": "points_allocator",
+          "value": [
+            {
+              "label": "交易/功利",
+              "points": 7,
+              "description": "作为交换、利益、资源分配的手段"
+            },
+            {
+              "label": "禁忌/压抑",
+              "points": 3,
+              "description": "被视为禁忌、罪恶、压抑、羞耻"
+            }
+          ]
+        }
+      ],
+      "specific_items": [
+        {
+          "id": "uuid-desire-1",
+          "type": "desire_element",
+          "name": "机械爱恋 (Mechanophilia)",
+          "description": "对机械造物（如发条人）产生爱慕和情欲的特殊癖好，在社会上被视为禁忌。",
+          "category": "fetish"
+        }
+      ]
+    }
+  },
+  "custom_input": {
+    "enabled": true,
+    "content": "天空永远被厚重的工业烟尘所笼罩，呈现出昏黄的色调。只有在帝国最高的尖塔上，才能偶尔窥见星空。"
+  }
+}

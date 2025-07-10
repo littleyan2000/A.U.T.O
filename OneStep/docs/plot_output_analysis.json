@@ -1,0 +1,131 @@
+{
+  "output_format_description": {
+    "title": "“剧情”页面输出格式解析",
+    "description": "当用户点击“生成角色卡”时，“剧情”页面的数据会被格式化为一个名为'Plot_Profile'的JSON对象，然后由'src/OneStep/app/Formatter.ts'中的'formatPlotProfileToText'方法转换为最终的文本。该文本块的核心是根据用户选择的叙事模式（线性/分支叙事 或 沙盒叙事）来定义故事的结构。",
+    "structure": {
+      "Plot_Profile": {
+        "structure": "包含叙事模式选择的核心对象，如 'mode': '线性/分支叙事'。",
+        "narrative_driven": "当模式为'线性/分支叙事'时出现，包含主线驱动力、焦点、节奏弧线和具体的线性剧情弧光列表（list）。",
+        "sandbox": "当模式为'沙盒叙事'时出现，包含沙盒驱动力、初始状态和具体的沙盒元素列表（elements）。",
+        "custom_notes": "用户填写的任何额外、自定义的需求。"
+      }
+    },
+    "generation_logic": "格式化程序会首先检查'structure.mode'的值。然后，它会只处理与该模式对应的对象（'narrative_driven'或'sandbox'），忽略另一个。所有未被用户填写或保持默认空值的字段（如空的文本框、未添加的列表项）在最终的文本输出中都会被忽略，以确保Prompt的简洁和高效。"
+  },
+  "full_linear_example": {
+    "description": "模拟一个所有选项都被详细填写，包含2个线性剧情弧光的线性叙事输出结果。",
+    "Plot_Profile": {
+      "structure": {
+        "mode": "线性/分支叙事"
+      },
+      "narrative_driven": {
+        "driver": "角色成长",
+        "focus": "主角克服内心恐惧，最终接受自己的身份。",
+        "pacing_arc": "慢热-高潮-缓和",
+        "list": [
+          {
+            "id": "uuid-arc-1",
+            "name": "第一幕：迷失的继承人",
+            "description": "主角发现自己拥有一个被遗忘的血统，但对此感到恐惧和抗拒，试图逃避自己的命运。",
+            "is_locked": false,
+            "is_collapsed": false
+          },
+          {
+            "id": "uuid-arc-2",
+            "name": "第二幕：宿命的对决",
+            "description": "一个强大的敌人出现，其目标正是主角的血统力量。主角被迫面对自己的身份，并与敌人展开对决。",
+            "is_locked": false,
+            "is_collapsed": false
+          }
+        ],
+        "custom_notes": "希望剧情的转折点能给主角带来深刻的心理变化。"
+      },
+      "sandbox": {
+        "driver": "",
+        "opening_state": "",
+        "elements": [],
+        "custom_notes": ""
+      }
+    }
+  },
+  "full_sandbox_example": {
+    "description": "模拟一个所有选项都被详细填写，包含2个沙盒元素的沙盒叙事输出结果。",
+    "Plot_Profile": {
+      "structure": {
+        "mode": "沙盒叙事"
+      },
+      "narrative_driven": {
+        "driver": "",
+        "focus": "",
+        "pacing_arc": "",
+        "list": [],
+        "custom_notes": ""
+      },
+      "sandbox": {
+        "driver": "探索发现",
+        "opening_state": "相对平静",
+        "elements": [
+          {
+            "id": "uuid-sandbox-1",
+            "name": "失落的古代遗迹",
+            "category": "地点",
+            "description": "一个隐藏在禁忌森林深处的古代遗迹，据说里面藏有能改变世界的力量。",
+            "is_locked": false,
+            "is_collapsed": false
+          },
+          {
+            "id": "uuid-sandbox-2",
+            "name": "神秘的商队",
+            "category": "势力",
+            "description": "一支行踪不定的商队，他们似乎在交易一些非法的古代物品，并知道许多秘密。",
+            "is_locked": false,
+            "is_collapsed": false
+          }
+        ],
+        "custom_notes": "希望世界中有多个线索指向同一个核心秘密，让玩家可以从不同角度进行探索。"
+      }
+    }
+  },
+  "empty_linear_example": {
+    "description": "模拟一个所有选项都置空，只填写了自定义文本框的线性叙事输出结果。",
+    "Plot_Profile": {
+      "structure": {
+        "mode": "线性/分支叙事"
+      },
+      "narrative_driven": {
+        "driver": "",
+        "focus": "",
+        "pacing_arc": "",
+        "list": [],
+        "custom_notes": "一个关于复仇和救赎的线性故事，请AI自由发挥具体情节。"
+      },
+      "sandbox": {
+        "driver": "",
+        "opening_state": "",
+        "elements": [],
+        "custom_notes": ""
+      }
+    }
+  },
+  "empty_sandbox_example": {
+    "description": "模拟一个所有选项都置空，只填写了自定义文本框的沙盒叙事输出结果。",
+    "Plot_Profile": {
+      "structure": {
+        "mode": "沙盒叙事"
+      },
+      "narrative_driven": {
+        "driver": "",
+        "focus": "",
+        "pacing_arc": "",
+        "list": [],
+        "custom_notes": ""
+      },
+      "sandbox": {
+        "driver": "",
+        "opening_state": "",
+        "elements": [],
+        "custom_notes": "一个后末日风格的废土世界，请AI自由设计其中的地点、势力和可探索内容。"
+      }
+    }
+  }
+}
